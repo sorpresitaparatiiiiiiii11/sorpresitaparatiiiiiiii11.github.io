@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de San Valentín</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('imagenes/fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            flex-direction: column;
+        }
+        #contenedor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        #conejo {
+            width: 150px; /* Agrandamos el conejo */
+            position: absolute;
+            bottom: -50px;
+            left: -100px;
+            animation: caminar 3s forwards;
+        }
+        @keyframes caminar {
+            0% { left: -100px; }
+            100% { left: 50%; transform: translateX(-50%); }
+        }
+        #mensaje, #adjetivos, #pregunta, #textoAdicional {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 3px solid black;
+            width: 80%;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            background: pink;
+            border: 3px solid black;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        #conejo-container {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="contenedor">
+        <div id="mensaje">¡Hola! Soy Bunny</div>
+        <div id="textoAdicional" style="display: none;">Quiero hacerte una pregunta...</div>
+        <div id="adjetivos" style="display: none;">Eres muy... <button id="adjetivoBtn">Amable</button></div>
+        <div id="pregunta" style="display: none;">¿Quieres ser mi San Valentín?<br>
+            <button id="siBtn">Sí</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+    <div id="conejo-container">
+        <img id="conejo" src="imagenes/conejito-1.png" alt="Conejito">
+    </div>
+    <script>
+        let mensaje = document.getElementById("mensaje");
+        let textoAdicional = document.getElementById("textoAdicional");
+        let adjetivos = document.getElementById("adjetivos");
+        let pregunta = document.getElementById("pregunta");
+        let conejo = document.getElementById("conejo");
+        let adjetivoBtn = document.getElementById("adjetivoBtn");
+        let siBtn = document.getElementById("siBtn");
+        let noBtn = document.getElementById("noBtn");
+
+        let adjetivosLista = ["Cariñoso", "Divertido", "Especial", "Atento", "Hermoso", "Encantador", "Brillante", "Creativo", "Valiente", "Tierno"];
+        let index = 0;
+        
+        conejo.addEventListener("animationend", () => {
+            mensaje.style.display = "block";
+        });
+        
+        mensaje.addEventListener("click", () => {
+            mensaje.style.display = "none";
+            textoAdicional.style.display = "block";
+        });
+        
+        textoAdicional.addEventListener("click", () => {
+            textoAdicional.innerText = "Pero antes, quiero enumerar algunas de las muchas razones por las que te quiero a ti";
+            setTimeout(() => { adjetivos.style.display = "block"; }, 1000);
+        });
+        
+        adjetivoBtn.addEventListener("click", () => {
+            if (index < adjetivosLista.length) {
+                adjetivoBtn.innerText = adjetivosLista[index];
+                index++;
+            } else {
+                adjetivos.style.display = "none";
+                pregunta.style.display = "block";
+            }
+        });
+        
+        siBtn.addEventListener("click", () => {
+            conejo.src = "imagenes/conejito-1.png";
+            alert("¡Yay! Te quiero mucho 💖");
+        });
+        
+        noBtn.addEventListener("click", () => {
+            conejo.src = "imagenes/conejito-1.png";
+            alert("Oh... está bien 😢");
+        });
+    </script>
+</body>
+</html>
