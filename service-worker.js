@@ -4,7 +4,7 @@ self.addEventListener('install', event => {
             return cache.addAll([
                 '/',
                 '/index.html',
-                '/imagenes/conejito 1.png'
+                '/imagenes/conejito-1.png'
             ]);
         })
     );
